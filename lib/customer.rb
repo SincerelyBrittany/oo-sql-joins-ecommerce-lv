@@ -11,19 +11,19 @@ class Customer
     DB[:connection].execute(sql)
   end
 
-  def carts
-    # customer_id = self
-    rows = DB[:connection].execute("SELECT * FROM carts WHERE carts.customer_id = ?", self.id)
-    #[cart_informmation], [cart_informmation]
-    carts.retify_from_row(rows.flatten)
-  end
-
-  def self.find(id)
-    row = DB[:connection].execute("SELECT * FROM customers WHERE id = ?", id)
-    #returns a nested array [[1,1]]
-    #Must flatten to get inside of the array
-    Customer.retify_from_row(row.flatten)
-  end
+  # def carts
+  #   # customer_id = self
+  #   rows = DB[:connection].execute("SELECT * FROM carts WHERE carts.customer_id = ?", self.id)
+  #   #[cart_informmation], [cart_informmation]
+  #   carts.retify_from_row(rows.flatten)
+  # end
+  #
+  # def self.find(id)
+  #   row = DB[:connection].execute("SELECT * FROM customers WHERE id = ?", id)
+  #   #returns a nested array [[1,1]]
+  #   #Must flatten to get inside of the array
+  #   Customer.reify_from_row(row.flatten)
+  # end
 
 
 

@@ -12,6 +12,22 @@ class Product
     DB[:connection].execute(sql)
   end
 
+  # def customers
+  #   sql = <<-SQL
+  #     SELECT DISTINT (customer.id), customers.name FROM customers
+  #     INNER JOIN carts on customers.id = carts.customer_id
+  #     INNER JOIN line_items on cart.id = line_items.cart_id
+  #     WHERE line_items.product.id = ?
+  #   SQL
+  #   rows = DB[:connection].execute(sql, self.id)
+  #   Customer.reify_from_row(rows)
+  # end
+  #
+  # def self.find(id)
+  #   row = DB[:connection].execute("SELECT * FROM products WHERE id = ?", id)
+  #   Product.reify_from_row(row.flatten)
+  # end
+
   def self.find_by_customer_id(customer_id)
     sql = <<-SQL
       SELECT * FROM products
