@@ -15,6 +15,7 @@ class Cart
     DB[:connection].execute(sql)
   end
 
+
   def save
     sql = <<-SQL
       INSERT INTO #{self.class}s (customer_id)
@@ -46,6 +47,15 @@ class Cart
     Cart.reify_from_row(rows.first)
   end
 
+  # def self.find(id)
+  #   DB[:connection].execute("SELECT * FROM carts WHERE id = ?", id)
+  #   #returns a nested array [[1,1]]
+  #   #Must flatten to get inside of the array
+  #   Cart.retify_from_row(row.flatten)
+  #
+  # end
+
+
   def self.all
     sql = <<-SQL
       SELECT * FROM carts
@@ -59,6 +69,7 @@ class Cart
     rows.collect{|r| reify_from_row(r)}
   end
 
+  #turns data into an object
   def self.reify_from_row(row)
     self.new.tap do |o|
       o.id = row[0]
@@ -69,7 +80,11 @@ class Cart
   # Belongs To
   def customer
     Customer.find(self.customer_id)
+    # the_id_i_need_to_query = self.customer_id
+    # #I need to query it from the customerstable itself
+    # row = DB[:connection].execute("select * from customer where id = ?", self.customer_id)
   end
+
 
   # How do we find products for this cart?
   # Has Many
